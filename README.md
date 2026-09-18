@@ -129,4 +129,4 @@ cd D:\文件夹
 $env:ELECTRON_MIRROR="https://npmmirror.com/mirrors/electron/"
 $env:ELECTRON_BUILDER_BINARIES_MIRROR="https://npmmirror.com/mirrors/electron-builder-binaries/"
 npm run dist
-会再/dist/里面生成exe文件
+会在/dist/里面生成exe文件
