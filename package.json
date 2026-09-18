@@ -18,6 +18,9 @@
   "build": {
     "appId": "com.celine.deepseekpet",
     "productName": "DeepSeekPet",
+    "electronDownload": {
+      "mirror": "https://npmmirror.com/mirrors/electron/"
+    },
     "files": [
       "main.js",
       "preload.js",
