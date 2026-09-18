@@ -98,7 +98,6 @@ deepseek-pet/
 ├── 启动.bat                 双击就能跑
 ├── 导入素材.bat              双击自动分拣角色图 + 体检 + 自动对齐
 ├── 对齐素材.bat              双击重新对齐已经导入的角色图
-├── 打包exe.bat               双击打包成单文件 exe
 ├── .gitignore               仓库里不包含 node_modules 等
 ├── 待导入/                   把角色图丢这里
 ├── 素材规格.md              你自己做图时的规格说明
@@ -130,6 +129,4 @@ cd D:\文件夹
 $env:ELECTRON_MIRROR="https://npmmirror.com/mirrors/electron/"
 $env:ELECTRON_BUILDER_BINARIES_MIRROR="https://npmmirror.com/mirrors/electron-builder-binaries/"
 npm run dist
-
----
-
+会再/dist/里面生成exe文件
