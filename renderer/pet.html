@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>DeepSeek 余额桌宠</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; img-src 'self' file: data:; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    />
+    <link rel="stylesheet" href="pet.css" />
+  </head>
+  <body>
+    <div id="stage">
+      <!-- 余额气泡：出现在角色左上方，尾巴指向角色的头 -->
+      <div id="bubble" class="bubble" aria-live="polite" aria-hidden="true">
+        <div class="bubble-body">
+          <div class="bubble-head">
+            <span id="bubble-dot" class="dot"></span>
+            <span id="bubble-title" class="head-text">DeepSeek 余额</span>
+          </div>
+          <div id="bubble-main" class="bubble-main">—</div>
+          <div id="bubble-sub" class="bubble-sub"></div>
+          <div id="bubble-foot" class="bubble-foot"></div>
+        </div>
+        <div class="bubble-tail" aria-hidden="true"></div>
+      </div>
+
+      <!-- 角色：两层图叠着，点击时只有上面那层（睁眼邪笑）淡入 -->
+      <div id="char-wrap" class="char-wrap">
+        <img id="char-idle" class="char" alt="" draggable="false" />
+        <img id="char-active" class="char char-active" alt="" draggable="false" />
+      </div>
+    </div>
+    <script src="pet.js"></script>
+  </body>
+</html>

@@ -1,0 +1,221 @@
+/* ============================================================
+   DeepSeek 余额桌宠 · 界面样式
+   窗口本身是透明的，这里所有背景都由下面的元素自己画出来。
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* 版面参数，运行时会由主进程算好后覆盖 */
+  --pad: 16px;
+  --bubble-w: 352px;
+  --char-w: 300px;
+  --char-h: 460px;
+
+  /* 配色：一张纸、一瓶墨、一个蓝 */
+  --paper: #fffcf5;
+  --ink: #171a22;
+  --ink-line: #171a22;
+  --muted: #7c8290;
+  --accent: #4d6bfe;
+  --warn: #e5484d;
+  --ok: #12a150;
+
+  --fade: 110ms;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  font-family: "Segoe UI Variable Text", "Segoe UI", "Microsoft YaHei UI", "PingFang SC",
+    system-ui, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+}
+
+/* ------------------------------------------------------------
+   角色
+   ------------------------------------------------------------ */
+
+.char-wrap {
+  position: absolute;
+  right: var(--pad);
+  bottom: var(--pad);
+  width: var(--char-w);
+  height: var(--char-h);
+  cursor: grab;
+}
+
+.char-wrap.is-dragging {
+  cursor: grabbing;
+}
+
+.char {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.char-active {
+  opacity: 0;
+  transition: opacity var(--fade) linear;
+}
+
+.char-wrap.is-active .char-active {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------
+   气泡：漫画感的分镜框 —— 硬边墨线 + 硬阴影，不用柔光投影
+   ------------------------------------------------------------ */
+
+.bubble {
+  position: absolute;
+  left: var(--pad);
+  top: var(--pad);
+  width: var(--bubble-w);
+  opacity: 0;
+  transform: scale(0.86);
+  transform-origin: 104% 94%; /* 从尾巴那一角长出来 */
+  transition: opacity 140ms ease-out, transform 180ms cubic-bezier(0.2, 0.9, 0.3, 1.3);
+  pointer-events: none;
+}
+
+.bubble.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.bubble-body {
+  position: relative;
+  background: var(--paper);
+  border: 1.5px solid var(--ink-line);
+  border-radius: 15px 15px 5px 15px; /* 右下角（尾巴那一角）收小，暗示指向 */
+  box-shadow: 5px 6px 0 rgba(23, 26, 34, 0.14);
+  padding: 13px 16px 11px;
+}
+
+.bubble-tail {
+  position: absolute;
+  right: -9px;
+  bottom: 18px;
+  width: 15px;
+  height: 15px;
+  background: var(--paper);
+  border-right: 1.5px solid var(--ink-line);
+  border-bottom: 1.5px solid var(--ink-line);
+  border-bottom-right-radius: 3px;
+  transform: rotate(-45deg);
+}
+
+.bubble-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+
+.dot.is-warn {
+  background: var(--warn);
+}
+
+.dot.is-ok {
+  background: var(--ok);
+}
+
+.head-text {
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.bubble-main {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.bubble-main .unit {
+  font-size: 17px;
+  font-weight: 600;
+  margin-right: 2px;
+  color: var(--ink);
+}
+
+.bubble-main.is-plain {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.bubble-main.is-error {
+  color: var(--warn);
+}
+
+.bubble-sub {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 3px;
+  overflow-wrap: anywhere; /* 接口返回的长串（URL、JSON 片段）不撑破气泡 */
+}
+
+.bubble-sub:empty {
+  display: none;
+}
+
+.bubble-foot {
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--muted);
+  opacity: 0.75;
+  margin-top: 7px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(23, 26, 34, 0.1);
+}
+
+.bubble-foot:empty {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble {
+    transform: none;
+    transition: opacity 120ms linear;
+  }
+  .char-active {
+    transition: none;
+  }
+}

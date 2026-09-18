@@ -1,0 +1,20 @@
+# 依赖和打包产物 —— 这些不该进仓库，别人 clone 下来自己 npm install 就行
+node_modules/
+dist/
+*.log
+
+# 个人配置（API Key 实际存在系统目录里，这里只是防止有人手动复制进来）
+config.json
+
+# 「待导入」是临时中转文件夹，真正的素材已经在 assets/characters 里了
+待导入/*.png
+待导入/*.webp
+待导入/*.jpg
+待导入/*.jpeg
+
+# 系统 / 编辑器产生的垃圾
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/

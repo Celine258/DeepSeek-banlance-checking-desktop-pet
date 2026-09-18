@@ -1,0 +1,42 @@
+{
+  "name": "deepseek-pet",
+  "productName": "DeepSeekPet",
+  "version": "1.0.1",
+  "description": "透明悬浮的桌面宠物，左键点击显示 DeepSeek 余额，右键更换角色",
+  "main": "main.js",
+  "author": "celine",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^32.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.celine.deepseekpet",
+    "productName": "DeepSeekPet",
+    "files": [
+      "main.js",
+      "preload.js",
+      "lib/**/*",
+      "renderer/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "assets",
+        "to": "assets"
+      }
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ]
+    },
+    "portable": {
+      "artifactName": "DeepSeekPet.exe"
+    }
+  }
+}
